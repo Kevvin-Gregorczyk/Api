@@ -1,34 +1,26 @@
-// Importowanie modułów
 const express = require('express');
 const bodyParser = require('body-parser');
-// Inicjalizacja aplikacji Express
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Ustawienie silnika szablonów EJS
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
-// Ustawienie parsowania danych z formularza
-app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routing
 app.get('/', (req, res) => {
     res.render('Home');
 });
 
-app.get('/success', (req, res) => {
-    res.render('Success');
+app.post('/Dodaj-Studenta', (req, res) => {
+    const fullName = req.body.fullName;
+    const code = req.body.code;
+    const fieldOfStudies = req.body.fieldOfStudies;
+    res.redirect('/Sukces');
 });
 
-app.get('/students-list', (req, res) => {
-    res.render('List');
+app.get('/Sukces', (req, res) => {
+    res.render('Sukces');
 });
-
-app.post('/add-student', (req, res) => {
-    res.redirect('/add-student');
-});
-
-// Nasłuchiwanie na porcie 3000
 app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`);
+    console.log(`Serwer działa na porcie ${PORT}`);
 });
